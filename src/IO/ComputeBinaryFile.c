@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "../../headers/Person.h"
 
-// Each record is separated by \r\n at the end in the binary file
+// Each record is separated by \r at the end in the binary file
 void skipToNextRecord(FILE *binaryFile) {
     char c;
     while ((c = fgetc(binaryFile)) != EOF) {
@@ -13,11 +13,11 @@ void skipToNextRecord(FILE *binaryFile) {
             break;
         }
     }
-    // Move back 2 bytes to unread the \r\n
+    // Move back 2 bytes to unread the \r
     fseek(binaryFile, -1, SEEK_CUR);
 }
 
-// Function that reads \r\n to prepare for the next record to be read
+// Function that reads \r to prepare for the next record to be read
 void readCRLF(FILE *binaryFile) {
     char endLine[2];
     fread(endLine, sizeof(char), 1, binaryFile);
