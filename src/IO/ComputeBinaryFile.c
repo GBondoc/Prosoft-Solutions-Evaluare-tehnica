@@ -10,21 +10,18 @@ void skipToNextRecord(FILE *binaryFile) {
     char c;
     while ((c = fgetc(binaryFile)) != EOF) {
         if (c == '\r') {
-            c = fgetc(binaryFile);
-            if (c == '\n') {
-                break; // Found \r\n, exit the loop
-            }
+            break;
         }
     }
     // Move back 2 bytes to unread the \r\n
-    fseek(binaryFile, -2, SEEK_CUR);
+    fseek(binaryFile, -1, SEEK_CUR);
 }
 
 // Function that reads \r\n to prepare for the next record to be read
 void readCRLF(FILE *binaryFile) {
-    char endLine[3];
-    fread(endLine, sizeof(char), 2, binaryFile);
-    endLine[2] = '\0';
+    char endLine[2];
+    fread(endLine, sizeof(char), 1, binaryFile);
+    endLine[1] = '\0';
 }
 
 // Function that reads a record of type PersonTmpl and loads it in person variable

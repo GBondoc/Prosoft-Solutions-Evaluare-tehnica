@@ -118,7 +118,7 @@ void generateBinaryFile(char *path) {
                 fwrite(&persons[i].Details.WorkDetails.sEmail, sizeof(persons[i].Details.WorkDetails.sEmail), 1, binaryFile);
                 break;
         }
-        fwrite("\r\n", sizeof(char), 2, binaryFile);
+        fwrite("\r", sizeof(char), 1, binaryFile);
     }
 
     // Close the file after writing
